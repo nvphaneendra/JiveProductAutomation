@@ -26,20 +26,21 @@ public class LoginPageTest extends BaseClass {
 		loginPage = new LoginPage();
 	}
 	
-	@Test(priority=1)
+	//@Test(priority=1)
 	public void loginPageTitleTest() {
 		String title = loginPage.validateLoginPageTitle();
 		Assert.assertEquals(title, "Welcome | community & Aurea&Jive");
 	}
 	
-	@Test(priority=2)
+	//@Test(priority=2)
 	public void clickOnLogInLink() {
 		
 	}
 	
 	@Test(priority=3)
 	public void loginTest() {
-		homePage = loginPage.logIn(prop.getProperty("UserName"), prop.getProperty("Password"));
+		loginPage.logIn(prop.getProperty("UserName"), prop.getProperty("Password"));
+		homePage = loginPage.clickOnLogIn();
 	}
 	
 	@AfterMethod
