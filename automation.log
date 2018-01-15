@@ -1,0 +1,82 @@
+2018-01-15 10:34:04 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 10:34:04 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 10:35:26 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 10:43:33 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 10:43:33 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 10:43:45 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 10:46:27 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 10:46:27 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 10:48:14 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 10:48:39 INFO  LoginPageTest:46 - Assert passed...
+2018-01-15 10:48:49 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 10:48:49 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 10:49:02 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 10:56:41 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 10:56:42 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 10:57:01 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 10:57:28 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 10:57:28 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 10:59:13 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 10:59:54 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 10:59:54 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:00:03 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:01:56 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:01:56 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:02:42 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:03:08 INFO  LoginPageTest:46 - Assert passed...
+2018-01-15 11:03:10 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:03:10 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:03:15 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:03:40 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:03:40 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:03:45 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:06:35 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:06:35 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:06:43 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:07:08 INFO  LoginPageTest:46 - Assert passed...
+2018-01-15 11:07:10 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:07:10 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:07:15 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:07:37 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:07:37 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:07:42 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:09:32 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:09:32 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:10:16 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:10:48 INFO  LoginPageTest:46 - Assert passed...
+2018-01-15 11:10:50 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:10:50 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:10:55 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:11:16 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:11:16 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:11:21 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:14:07 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:14:07 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:14:15 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:14:37 INFO  LoginPageTest:46 - Assert passed...
+2018-01-15 11:14:39 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:14:39 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:14:45 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 11:15:08 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 11:15:08 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 11:15:14 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 12:42:48 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 12:42:48 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 12:43:04 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 12:43:30 INFO  LoginPageTest:46 - Assert passed...
+2018-01-15 12:43:33 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 12:43:33 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 12:44:39 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 12:44:58 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 12:44:58 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 12:45:04 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 13:24:28 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 13:24:28 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 13:25:52 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 13:26:22 INFO  LoginPageTest:46 - Assert passed...
+2018-01-15 13:26:24 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 13:26:24 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 13:26:30 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/
+2018-01-15 13:26:49 INFO  LoginPageTest:37 - ===== SetUp method initialization is going on =====
+2018-01-15 13:26:49 INFO  BaseClass:53 - Current OS name ::: =====>Windows 10
+2018-01-15 13:26:56 INFO  BaseClass:99 - Launching the browser chrome and enter required URL https://caro-20171-reg3-release-east.jivelandia.com/

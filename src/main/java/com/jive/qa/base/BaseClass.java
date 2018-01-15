@@ -8,13 +8,23 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.jive.util.TestUtil;
+
+/**
+ * @author : Phani
+ * File Created on :  Jan 11, 2018
+ * File Name : BaseClass.java
+ */
 
 public class BaseClass {
 	
@@ -39,12 +49,11 @@ public class BaseClass {
 	
 	public static void initialization() throws InterruptedException {
 		
-		String osName = System.getProperty("os.name").toLowerCase();
-		System.out.println("Current OS name ==>" +osName);
+		String osName = System.getProperty("os.name");
+		logger.info("Current OS name ::: =====>" +osName);
 		String browserName = prop.getProperty("browser");
 		
-		logger.info("Current OS name ::: =====>" +osName);
-		if(osName.startsWith("windows")) {
+		if(osName.startsWith("Windows")) {
 			
 			if(prop.getProperty("browser").equals("chrome")) {
 			
@@ -64,7 +73,7 @@ public class BaseClass {
 			driver = new InternetExplorerDriver();
 		
 	        } else {
-	        	System.out.println("No proper browser driver was not found... Please add required driver properly.. !!!");
+	        	logger.info("No proper browser driver was not found... Please add required driver properly.. !!!");
 	        }						
 		} else if (osName.startsWith("Linux")) {
 			
@@ -79,7 +88,7 @@ public class BaseClass {
 			}
 		}
 	} else {
-		System.out.println("Current OS requirement was not configured corretly... Please contact Admin or Automation Test Engineer to setup environment properly...");
+		logger.info("Current OS requirement was not configured corretly... Please contact Admin or Automation Test Engineer to setup environment properly...");
 	}
 		
 		driver.manage().window().maximize();
@@ -90,6 +99,28 @@ public class BaseClass {
 		logger.info("Launching the browser " +prop.getProperty("browser")+ " and enter required URL " +prop.getProperty("URL"));
 		driver.get(prop.getProperty("URL"));
 		Thread.sleep(5000);
+	}
+	
+	public static boolean clickByJS(WebDriver driver, WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+			return true;
+		} catch (final Exception e) {
+			return false;
+		}
+	}
+	
+	public static boolean isWebElementClickable(WebDriver driver, WebElement element) {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 120);
+			wait.until(ExpectedConditions.elementToBeClickable(element));
+			return true;
+		} catch (final Exception e) {
+			return false;
+		}
+
 	}
 		
 }

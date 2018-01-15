@@ -4,15 +4,20 @@ import com.jive.qa.base.BaseClass;
 
 import java.io.IOException;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
+
+/**
+ * 
+ * @author : Phani
+ * File Created on :  Jan 11, 2018
+ * File Name : LoginPage.java
+ */
 
 public class LoginPage extends BaseClass {
 
-	@FindBy(id = "navLogin")
+	@FindBy(className="login")
 	WebElement logIn;
 
 	@FindBy(name = "username")
@@ -21,7 +26,7 @@ public class LoginPage extends BaseClass {
 	@FindBy(name = "password")
 	WebElement passWord;
 
-	@FindBy(xpath = "//*[@value='Log in']")
+	@FindBy(id="login-submit")
 	WebElement submit;
 
 	public LoginPage() throws IOException {
@@ -33,34 +38,23 @@ public class LoginPage extends BaseClass {
 		return driver.getTitle();
 	}
 
-	public HomePage clickOnLogIn() {
+	public void clickOnLogIn() {
 		logIn.click();
-		return null;
-	}
-	
-	public void clickOnSubmit()
-	{
-		if(driver.getCurrentUrl().toString().contains("login.jspa"))
-		{
-			boolean t = submit.isDisplayed();
-			Assert.assertTrue(false);
-			// logIn(String un, String pwd);
-			System.out.println("if executed");
-		}
-		else
-		{
-			boolean t1 = submit.isDisplayed();
-			Assert.assertTrue(true);
-			System.out.println("else executed");
-		}
+		
 	}
 
-	public HomePage logIn(String un, String pwd) {
+	public HomePage logIn(final String un, final String pwd) {
 		clickOnLogIn();
 		userName.sendKeys(un);
 		passWord.sendKeys(pwd);
-		submit.click();
+		if(submit.isEnabled()) {
+		submit.submit();		
+		}
+		else {
+			System.out.println("Button is not enabled...");
+		}
 		return new HomePage();
+		
 	}
 
 }
