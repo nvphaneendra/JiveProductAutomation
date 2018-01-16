@@ -36,13 +36,11 @@ public class ExtentReporterNG implements IReporter {
 
 			for (ISuiteResult r : result.values()) {
 				ITestContext context = r.getTestContext();
-
 				buildTestNodes(context.getPassedTests(), LogStatus.PASS);
 				buildTestNodes(context.getFailedTests(), LogStatus.FAIL);
 				buildTestNodes(context.getSkippedTests(), LogStatus.SKIP);
 			}
 		}
-
 		extent.flush();
 		extent.close();
 	}

@@ -5,8 +5,8 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.jive.qa.base.BaseClass;
@@ -32,7 +32,7 @@ public class LoginPageTest extends BaseClass {
 		super();
 	}
 
-	@BeforeMethod
+	@BeforeTest
 	public void setUp() throws IOException, InterruptedException {
 		logger.info("===== SetUp method initialization is going on =====");
 		initialization();
@@ -55,7 +55,7 @@ public class LoginPageTest extends BaseClass {
 		loginPage.logIn(prop.getProperty("UserName"), prop.getProperty("Password"));
 	}
 	
-	@AfterMethod
+	@AfterTest
 	public void tearDown() {		
 		driver.quit();		
 	}

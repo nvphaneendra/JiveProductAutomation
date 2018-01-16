@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="-1" guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [Jive Product QA Automation Testing]">
+  <listeners>
+    <listener class-name="com.jive.qa.ExtentReportListener.ExtentReporterNG"/>
+  </listeners>
+  <test verbose="0" name="Jive TestCases(failed)">
+    <classes>
+      <class name="com.jive.qa.atcs.LoginPageTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="loginTest"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.jive.qa.atcs.LoginPageTest -->
+    </classes>
+  </test> <!-- Jive TestCases(failed) -->
+</suite> <!-- Failed suite [Jive Product QA Automation Testing] -->
