@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * 
  * @author : Phani
  * File Created on :  Jan 11, 2018
  * File Name : LoginPage.java
@@ -53,8 +52,7 @@ public class LoginPage extends BaseClass {
 		else {
 			System.out.println("Button is not enabled...");
 		}
-		return new HomePage();
-		
+		return new HomePage();		
 	}
 
 }

@@ -4,21 +4,31 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
+import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import com.jive.util.TestUtil;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * @author : Phani
@@ -32,6 +42,15 @@ public class BaseClass {
 	
 	public static WebDriver driver;
 	public static Properties prop;
+	public static ExtentReports extent;
+	public static ExtentTest test;
+	public ITestResult result;
+	
+	static {
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+		extent = new ExtentReports(System.getProperty("user.dir") + "/src/main/java/com/jive/qa/TestReport" + formater.format(calendar.getTime()) + ".html", false);
+	}
 	
 	public BaseClass() throws IOException {
 		
@@ -80,12 +99,7 @@ public class BaseClass {
 			if(prop.getProperty("browser").equals("chrome")) {				
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/main/resources/linux/chromedriver");	
 				driver = new ChromeDriver();			
-			ChromeDriverService service = new ChromeDriverService.Builder().usingDriverExecutable(new File(System.getProperty("user.dir")+"/src/test/resources/linux/chromedriver")).usingAnyFreePort().build();
-			try {
-				service.start();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
 		}
 	} else {
 		logger.info("Current OS requirement was not configured corretly... Please contact Admin or Automation Test Engineer to setup environment properly...");
@@ -101,26 +115,72 @@ public class BaseClass {
 		Thread.sleep(5000);
 	}
 	
-	public static boolean clickByJS(WebDriver driver, WebElement element) {
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-			return true;
-		} catch (final Exception e) {
-			return false;
-		}
+	public void extentReport() throws IOException, InterruptedException {
+		initialization();
+		extent = new ExtentReports(System.getProperty("user.dir")+"/src/main/java/com/jive/qa/TestReport/JiveProduct.html", true);
+		String log4jConfPath = "log4j.proprties";
+		PropertyConfigurator.configure(log4jConfPath);
 	}
 	
-	public static boolean isWebElementClickable(WebDriver driver, WebElement element) {
-
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, 120);
-			wait.until(ExpectedConditions.elementToBeClickable(element));
-			return true;
-		} catch (final Exception e) {
-			return false;
-		}
-
+	public void getResult(ITestResult result) throws IOException {
+	if(result.getStatus()==ITestResult.SUCCESS) {
+		test.log(LogStatus.PASS,result.getName()+" test is pass");
 	}
+	else if(result.getStatus()==ITestResult.SKIP) {
+		test.log(LogStatus.SKIP,result.getName()+" test is skipped and because of" +result.getThrowable());
+	}
+	else if(result.getStatus()==ITestResult.FAILURE) {
+		test.log(LogStatus.ERROR,result.getName()+" test is failed" +result.getThrowable());
+		String screen = captureScreen("");
+		test.log(LogStatus.FAIL, test.addScreenCapture(captureScreen(screen)));
+	}
+	else if(result.getStatus()==ITestResult.STARTED) {
+		test.log(LogStatus.INFO, result.getName()+"test is stated");
+	}
+	}
+	
+	public String captureScreen(String fileName) throws IOException {
 		
+		if(fileName=="") {
+			fileName="blank";
+		}
+		
+		File destFile = null;
+		Calendar calender = Calendar.getInstance();
+		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+		
+			File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			
+				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/jive/qa/ScreentShot/";
+				destFile = new File((String) reportDirectory + fileName + "_" + formater.format(calender.getTime()) + ".png");
+				FileUtils.copyFile(scrFile, destFile);
+				
+				Reporter.log("<a href='" +destFile.getAbsolutePath() +"'> <img src='" +destFile.getAbsolutePath() + "' height='100' width='100'/> <a/>");
+				
+			return destFile.toString();
+	}
+	
+	public void closeBrowser() {
+		driver.quit();
+		logger.info("Close browser");
+		extent.endTest(test);
+		extent.flush();
+	}
+	
+	@AfterMethod
+	public void afterMethod(ITestResult result) throws IOException {
+		getResult(result);
+	}
+	
+	@BeforeMethod
+	public void beforeMethod(Method result) {
+		test = extent.startTest(result.getName());
+		test.log(LogStatus.INFO, result.getName()+" test started");
+	}
+	
+	@AfterClass(alwaysRun=true) 
+	public void endTest() {
+		closeBrowser();
+	}
+			
 }
