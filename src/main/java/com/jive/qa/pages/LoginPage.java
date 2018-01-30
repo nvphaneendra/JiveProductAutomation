@@ -4,6 +4,7 @@ import com.jive.qa.base.BaseClass;
 
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,19 +16,27 @@ import org.openqa.selenium.support.PageFactory;
  */
 
 public class LoginPage extends BaseClass {
+	
+	private static final Logger logger = Logger.getLogger(LoginPage.class);
 
 	@FindBy(className="login")
 	WebElement logIn;
 
-	@FindBy(name = "username")
+	@FindBy(name="username")
 	WebElement userName;
 
-	@FindBy(name = "password")
+	@FindBy(name="password")
 	WebElement passWord;
 
-	@FindBy(id="login-submit")
+	@FindBy(xpath="//input[@name='login']")
 	WebElement submit;
-
+	
+	@FindBy(xpath="//input[@name='submit']")
+	WebElement loginSubmit;
+	
+	@FindBy(xpath="//*[contains(@id, 'logout')]")
+	WebElement logOut;
+	
 	public LoginPage() throws IOException {
 
 		PageFactory.initElements(driver, this);
@@ -46,13 +55,18 @@ public class LoginPage extends BaseClass {
 		clickOnLogIn();
 		userName.sendKeys(un);
 		passWord.sendKeys(pwd);
-		if(submit.isEnabled()) {
-		submit.submit();		
+		if(loginSubmit.isEnabled()) {
+			logger.info("It's calling the URL = 'https://caro-20171-reg3-release-east.jivelandia.com/'");
+			loginSubmit.submit();		
 		}
 		else {
-			System.out.println("Button is not enabled...");
+			logger.info("It's calling the URL = 'https://caro-20171-reg3-release-east.jivelandia.com/login.jspa'");
+			submit.submit();
 		}
 		return new HomePage();		
 	}
-
+	
+	public void clickOnLogOut() {
+		logOut.click();
+	}
 }

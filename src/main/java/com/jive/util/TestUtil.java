@@ -15,7 +15,9 @@ public class TestUtil extends BaseClass{
 	public TestUtil() throws IOException {
 		super();
 	}
+	
 	public static long PAGE_LOAD_TIMEOUT = 50;
 	public static long IMPLICT_WAIT = 60;
+	public static long SCRIPT_TIMEOUT = 20;
 
 }

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
 <suite name="Jive Product QA Automation Testing">
-  <test thread-count="5" name="Jive TestCases">
+
+<listeners>
+<listener class-name="com.jive.qa.Analyzer.MyTransformer"></listener>
+</listeners>
+
+  <test name="Jive TestCases">
     <classes>
       <class name="com.jive.qa.atcs.LoginPageTest"/>
     </classes>

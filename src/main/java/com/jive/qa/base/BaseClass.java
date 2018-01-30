@@ -1,13 +1,10 @@
 package com.jive.qa.base;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -25,6 +22,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import com.jive.util.Constants;
+import com.jive.util.PropertyUtil;
 import com.jive.util.TestUtil;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -41,54 +40,36 @@ public class BaseClass {
 	private static final Logger logger = Logger.getLogger(BaseClass.class);
 	
 	public static WebDriver driver;
-	public static Properties prop;
 	public static ExtentReports extent;
 	public static ExtentTest test;
-	public ITestResult result;
+	public static String screen;
 	
-	static {
-		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-		extent = new ExtentReports(System.getProperty("user.dir") + "/src/main/java/com/jive/qa/TestReport" + formater.format(calendar.getTime()) + ".html", false);
-	}
-	
-	public BaseClass() throws IOException {
+	public ITestResult result;	
 		
-		try 
-		{
-			prop = new Properties();
-			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"/src/main/java/com/jive/qa/config/jive.properties");
-			prop.load(fis); 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void initialization() throws InterruptedException {
+	public static void initialization() {
 		
+		try {
 		String osName = System.getProperty("os.name");
 		logger.info("Current OS name ::: =====>" +osName);
-		String browserName = prop.getProperty("browser");
+		String browserName = PropertyUtil.getProperty("browser");
 		
 		if(osName.startsWith("Windows")) {
 			
-			if(prop.getProperty("browser").equals("chrome")) {
+			if(PropertyUtil.getProperty("browser").equals("chrome")) {
 			
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/main/resources/win/chromedriver.exe");	
+			System.setProperty(Constants.WEBDRIVER_CHROME_DRIVER, System.getProperty("user.dir")+"/src/main/resources/win/chromedriver.exe");	
 			driver = new ChromeDriver();
 			
 			} 
 			else if(browserName.equals("firefox")){
 			
-			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"/src/main/resources/win/geckodriver.exe");	
+			System.setProperty(Constants.WEBDRIVER_GECKO_DRIVER, System.getProperty("user.dir")+"/src/main/resources/win/geckodriver.exe");	
 			driver = new FirefoxDriver();
 			
 		    }
 			else if(browserName.equals("IE")){
 				
-			System.setProperty("webdriver.ie.driver", System.getProperty("user.dir")+"/src/main/resources/win/IEDriverServer.exe");	
+			System.setProperty(Constants.WEBDRIVER_IE_DRIVER, System.getProperty("user.dir")+"/src/main/resources/win/IEDriverServer.exe");	
 			driver = new InternetExplorerDriver();
 		
 	        } else {
@@ -96,8 +77,8 @@ public class BaseClass {
 	        }						
 		} else if (osName.startsWith("Linux")) {
 			
-			if(prop.getProperty("browser").equals("chrome")) {				
-				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/main/resources/linux/chromedriver");	
+			if(PropertyUtil.getProperty("browser").equals("chrome")) {				
+				System.setProperty(Constants.WEBDRIVER_CHROME_DRIVER, System.getProperty("user.dir")+"/src/main/resources/linux/chromedriver");	
 				driver = new ChromeDriver();			
 			
 		}
@@ -109,37 +90,45 @@ public class BaseClass {
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICT_WAIT, TimeUnit.SECONDS);
+		driver.manage().timeouts().setScriptTimeout(TestUtil.SCRIPT_TIMEOUT, TimeUnit.SECONDS);
 		
-		logger.info("Launching the browser " +prop.getProperty("browser")+ " and enter required URL " +prop.getProperty("URL"));
-		driver.get(prop.getProperty("URL"));
+		logger.info("Launching the browser " +PropertyUtil.getProperty("browser")+ " and enter required URL " +PropertyUtil.getProperty("URL"));
+		driver.get(PropertyUtil.getProperty("URL"));
 		Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void extentReport() throws IOException, InterruptedException {
+	public void extentReport() {
 		initialization();
 		extent = new ExtentReports(System.getProperty("user.dir")+"/src/main/java/com/jive/qa/TestReport/JiveProduct.html", true);
 		String log4jConfPath = "log4j.proprties";
 		PropertyConfigurator.configure(log4jConfPath);
 	}
 	
-	public void getResult(ITestResult result) throws IOException {
+	public void getResult(ITestResult result) {
 	if(result.getStatus()==ITestResult.SUCCESS) {
 		test.log(LogStatus.PASS,result.getName()+" test is pass");
+		captureScreen("");
+		test.log(LogStatus.PASS, test.addScreenCapture(captureScreen(screen)));
 	}
 	else if(result.getStatus()==ITestResult.SKIP) {
 		test.log(LogStatus.SKIP,result.getName()+" test is skipped and because of" +result.getThrowable());
+		captureScreen("");
+		test.log(LogStatus.SKIP, test.addScreenCapture(captureScreen(screen)));
 	}
 	else if(result.getStatus()==ITestResult.FAILURE) {
 		test.log(LogStatus.ERROR,result.getName()+" test is failed" +result.getThrowable());
-		String screen = captureScreen("");
+		captureScreen("");
 		test.log(LogStatus.FAIL, test.addScreenCapture(captureScreen(screen)));
 	}
 	else if(result.getStatus()==ITestResult.STARTED) {
 		test.log(LogStatus.INFO, result.getName()+"test is stated");
 	}
-	}
+  }
 	
-	public String captureScreen(String fileName) throws IOException {
+	public String captureScreen(String fileName) {
 		
 		if(fileName=="") {
 			fileName="blank";
@@ -151,9 +140,13 @@ public class BaseClass {
 		
 			File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 			
-				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/jive/qa/ScreentShot/";
-				destFile = new File((String) reportDirectory + fileName + "_" + formater.format(calender.getTime()) + ".png");
-				FileUtils.copyFile(scrFile, destFile);
+				try {
+					String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/jive/qa/TestReport/Screenshot/";
+					destFile = new File((String) reportDirectory + fileName + "_" + formater.format(calender.getTime()) + ".png");
+					FileUtils.copyFile(scrFile, destFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
 				Reporter.log("<a href='" +destFile.getAbsolutePath() +"'> <img src='" +destFile.getAbsolutePath() + "' height='100' width='100'/> <a/>");
 				
@@ -168,7 +161,7 @@ public class BaseClass {
 	}
 	
 	@AfterMethod
-	public void afterMethod(ITestResult result) throws IOException {
+	public void afterMethod(ITestResult result) {
 		getResult(result);
 	}
 	
@@ -181,6 +174,5 @@ public class BaseClass {
 	@AfterClass(alwaysRun=true) 
 	public void endTest() {
 		closeBrowser();
-	}
-			
+	}			
 }

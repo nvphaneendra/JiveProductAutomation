@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.jive.qa.base.BaseClass;
 import com.jive.qa.pages.HomePage;
 import com.jive.qa.pages.LoginPage;
+import com.jive.util.PropertyUtil;
 
 /**
  * @author : Phani
@@ -36,20 +37,28 @@ public class LoginPageTest extends BaseClass {
 		loginPage = new LoginPage();
 	}
 	
-	@Test(priority=1)
+	@Test()
 	public void loginPageTitleTest() {
 		String title = loginPage.validateLoginPageTitle();
 		Assert.assertEquals(title, "Welcome | community & Aurea&Jive");
 		logger.info("Assert passed...");
 	}
 	
-	@Test(priority=2)
-	public void clickOnLogInLink() {		
+	@Test()
+	public void clickOnLogInLink() {
+		logger.info("Click on Login link.");
 	}
 	
-	@Test(priority=3)
+	@Test()
 	public void loginTest() {
-		loginPage.logIn(prop.getProperty("UserName"), prop.getProperty("Password"));
+		logger.info("Entering UserName and Password.");
+		loginPage.logIn(PropertyUtil.getProperty("UserName"), PropertyUtil.getProperty("Password"));
+		clickOnLogOutBut();
 	}
 	
+	@Test()
+	public void clickOnLogOutBut() {
+		logger.info("Click on logout button.");
+		
+	}
 }
