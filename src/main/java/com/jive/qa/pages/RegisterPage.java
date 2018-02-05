@@ -32,6 +32,15 @@ public class RegisterPage extends BaseClass {
 		PageFactory.initElements(driver, this);
 	}
 	
+	public void clickRegister() {
+		register.click();
+	}
 	
+	public void enterEmailAddress(final String emailID) {
+		regEmail.sendKeys(emailID);
+	}
+	public void clickConformButton(){
+		regButton.submit();
+	}
 
 }

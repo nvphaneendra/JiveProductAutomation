@@ -10,6 +10,7 @@
   <test name="Jive TestCases">
     <classes>
       <class name="com.jive.qa.atcs.LoginPageTest"/>
+      <class name="com.jive.qa.atcs.RegisterPageTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
