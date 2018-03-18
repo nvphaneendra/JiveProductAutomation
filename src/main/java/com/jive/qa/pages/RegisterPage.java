@@ -19,7 +19,7 @@ public class RegisterPage extends BaseClass {
 	private static final Logger logger = Logger.getLogger(RegisterPage.class);
 	
 	@FindBy(className="register")
-	WebElement register;
+	WebElement registerLink;
 	
 	@FindBy(id="emailAddress")
 	WebElement regEmail;
@@ -33,10 +33,11 @@ public class RegisterPage extends BaseClass {
 	}
 	
 	public void clickRegister() {
-		register.click();
+		registerLink.click();
 	}
 	
-	public void enterEmailAddress(final String emailID) {
+	public void enterEmailAddress(String emailID) {
+		clickRegister();
 		regEmail.sendKeys(emailID);
 	}
 	public void clickConformButton(){

@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.OutputType;
@@ -16,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.io.FileHandler;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -37,7 +37,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class BaseClass {
 	
-	private static final Logger logger = Logger.getLogger(BaseClass.class);
+	private static final Logger logger = Logger.getLogger(BaseClass.class.getName());
 	
 	public static WebDriver driver;
 	public static ExtentReports extent;
@@ -143,7 +143,7 @@ public class BaseClass {
 				try {
 					String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/jive/qa/TestReport/Screenshot/";
 					destFile = new File((String) reportDirectory + fileName + "_" + formater.format(calender.getTime()) + ".png");
-					FileUtils.copyFile(scrFile, destFile);
+					FileHandler.copy(scrFile, destFile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -154,7 +154,13 @@ public class BaseClass {
 	}
 	
 	public void closeBrowser() {
-		driver.quit();
+		//driver.quit();
+		try {
+			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		logger.info("Close browser");
 		extent.endTest(test);
 		extent.flush();
